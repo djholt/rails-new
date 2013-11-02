@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+project_name, rails_version = ARGV
+
+unless project_name
+  puts "usage: rails-new project_name [rails_version]"
+  exit
+end
+
+Dir.mkdir(project_name)
+Dir.chdir(project_name)
+
+File.open("Gemfile", "w") do |f|
+  f.puts "source 'https://rubygems.org'"
+  f.puts rails_version ? "gem 'rails', '#{rails_version}'" : "gem 'rails'"
+end
+
+system "bundle install --path vendor/bundle"
+system "bundle exec rails new . --force --skip-test-unit"
+
+puts "=" * 80
+puts "Project created at #{Dir.pwd}"
+puts "=" * 80
