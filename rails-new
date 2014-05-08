@@ -16,7 +16,8 @@ File.open("Gemfile", "w") do |f|
 end
 
 system "bundle install --path vendor/bundle"
-system "bundle exec rails new . --force --skip-test-unit"
+system "bundle exec rails new . --force --skip-bundle --skip-test-unit"
+system "bundle update"
 
 puts "=" * 80
 puts "Project created at #{Dir.pwd}"
